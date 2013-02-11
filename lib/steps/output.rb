@@ -5,6 +5,7 @@ require 'steps/spinner'
 
 module Steps
   class Output
+
     @spinner = Steps::Spinner.new
     @task_depth = 0
     @stacked_result = false
