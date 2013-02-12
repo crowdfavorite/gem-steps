@@ -1,5 +1,5 @@
 $:.push File.expand_path("../lib", __FILE__)
-require "cf_steps/version"
+require "cf-steps/version"
 
 Gem::Specification.new do |s|
   s.name        = 'cf_steps'

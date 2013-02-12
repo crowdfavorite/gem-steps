@@ -1,7 +1,7 @@
 # encoding: utf-8
 STDOUT.sync
 require 'colored'
-require 'cf_steps/spinner'
+require 'cf-steps/spinner'
 
 module CFSteps
   class Output
