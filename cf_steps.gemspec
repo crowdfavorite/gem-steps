@@ -1,6 +1,5 @@
-
 Gem::Specification.new do |s|
-  s.name        = 'cf-steps'
+  s.name        = 'cf_steps'
   s.version     = '0.9.0'
   s.license     = "Apache 2.0"
   s.date        = Time.now.utc
