@@ -1,4 +1,4 @@
-module Steps
+module CFSteps
 
   # Simple shell spinner to provide user feedback
   #

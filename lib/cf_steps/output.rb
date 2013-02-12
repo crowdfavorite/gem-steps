@@ -1,12 +1,12 @@
 # encoding: utf-8
 STDOUT.sync
 require 'colored'
-require 'steps/spinner'
+require 'cf_steps/spinner'
 
-module Steps
+module CFSteps
   class Output
 
-    @spinner = Steps::Spinner.new
+    @spinner = CFSteps::Spinner.new
     @task_depth = 0
     @stacked_result = false
 
@@ -69,17 +69,16 @@ module Steps
 end
 
 def step(desc, options={})
-  Steps::Output.start_to desc
+  CFSteps::Output.start_to desc
   begin
     smessage = yield
     smessage = "✔" unless smessage.is_a? String
-    Steps::Output.success smessage
+    CFSteps::Output.success smessage
   rescue Exception => e
       message = e.message.empty? ? "X" : e.message
-      if options[:vital]
-        Steps::Output.error_and_exit(message)
-      else
-        Steps::Output.error message
-      end
+
+      options[:vital] ?
+        CFSteps::Output.error_and_exit(message):
+        CFSteps::Output.error(message)
   end
 end
