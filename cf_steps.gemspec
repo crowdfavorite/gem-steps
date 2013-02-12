@@ -1,6 +1,9 @@
+$:.push File.expand_path("../lib", __FILE__)
+require "cf_steps/version"
+
 Gem::Specification.new do |s|
   s.name        = 'cf_steps'
-  s.version     = '0.9.0'
+  s.version     = CFSteps::VERSION
   s.license     = "Apache 2.0"
   s.date        = Time.now.utc
   s.summary     = 'Scripting output helper'
