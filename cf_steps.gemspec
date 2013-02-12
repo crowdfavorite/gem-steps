@@ -4,7 +4,7 @@ require "cf_steps/version"
 Gem::Specification.new do |s|
   s.name        = 'cf-steps'
   s.version     = CFSteps::VERSION
-  gem.license   = "Apache 2.0"
+  s.license     = "Apache 2.0"
   s.date        = Time.now.utc
   s.summary     = 'Scripting output helper'
   s.description = 'A way to simplify the output of shell scripting written in ruby.  Should work appropriately for capistrano and rake tasks'
