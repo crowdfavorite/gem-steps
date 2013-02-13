@@ -1,4 +1,4 @@
-# cf_steps
+# cf-steps
 
 ## General
 
