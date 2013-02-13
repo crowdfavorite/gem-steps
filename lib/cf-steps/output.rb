@@ -1,6 +1,7 @@
 # encoding: utf-8
 STDOUT.sync
 require 'colored'
+require 'highline'
 require 'cf-steps/spinner'
 
 module CFSteps
@@ -9,6 +10,7 @@ module CFSteps
     @spinner = CFSteps::Spinner.new
     @task_depth = 0
     @stacked_result = false
+    @highline = HighLine.new
 
     def self.start_to message
       lead_str = ""
@@ -65,7 +67,39 @@ module CFSteps
     def self.info message
       self.result(message.blue)
     end
+
+    def self.confirm(message, options={})
+      message = message + " (y|n) > "
+      message = "├── ".yellow + (options[:vital] ? message.red : message.blue) + " "
+      @spinner.stop
+      result = @highline.agree(message)
+      if @task_depth > 0
+        print "|   ".yellow * (@task_depth - 1)
+        @spinner.start
+      end
+      return result
+    end
+
+    def self.retrieve(message, options={:answer_type => String}, &block)
+      message = message + " > "
+      message = "├── ".yellow + message.blue + " "
+      @spinner.stop
+      result = @highline.ask(message, options[:answer_type], &block)
+      if @task_depth > 0
+        print "|   ".yellow * (@task_depth - 1)
+        @spinner.start
+      end
+      return result
+    end
   end
+end
+
+def confirm(message, options={})
+  CFSteps::Output.confirm(message, options)
+end
+
+def retrieve(message, options={})
+  CFSteps::Output.retrieve(message, options)
 end
 
 def step(desc, options={})

@@ -12,4 +12,5 @@ Gem::Specification.new do |s|
   s.files       = Dir['lib/**/*.rb']
   s.homepage    = 'http://crowdfavorite.com'
   s.add_runtime_dependency "colored"
+  s.add_runtime_dependency "highline"
 end
