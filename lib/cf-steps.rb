@@ -12,10 +12,6 @@ def confirm(message, options={})
   CFSteps::Output.confirm(message, options)
 end
 
-def error(message)
-  CFSteps::Output.error(message)
-end
-
 def error_and_exit(message)
   CFSteps::Output.error_and_exit(message)
 end
