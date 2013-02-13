@@ -84,12 +84,12 @@ module CFSteps
       return result
     end
 
-    def self.retrieve(message, options={:answer_type => String}, &block)
+    def self.retrieve(message, answer_type = String, &block)
       message = message + " > "
       message = message.blue + " "
       message = "├── ".yellow + message if @task_depth > 0
       @spinner.stop
-      result = @highline.ask(message, options[:answer_type], &block)
+      result = @highline.ask(message, answer_type, &block)
       if @task_depth > 0
         print "|   ".yellow * (@task_depth - 1)
         @spinner.start
