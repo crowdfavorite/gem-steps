@@ -22,7 +22,7 @@ To define a "step" in your scripting process simply surround the grouping of ope
 
 Nested steps are supported
 
-### Options
+### Other
 
   **Exit if step fails**
 
@@ -33,7 +33,7 @@ Nested steps are supported
 ```
 
   **Manually bail out of step**
-  
+
 ```ruby
     def step "Do Something" do
       // do something
@@ -42,6 +42,7 @@ Nested steps are supported
       end
     end
 ```
+
   **Custom Complete Message**
 
 ```ruby
@@ -50,3 +51,25 @@ Nested steps are supported
       "This is the success Message"
     end
 ```
+
+  **Provide feedback**
+
+```ruby
+    def step "Do Something" do
+      // do something
+      report "The user would like to see this info"
+      // do more stuff
+    end
+```
+### Getting User Feedback (highline integration)
+
+#### confirm
+
+Function similar to highline agree function, except it plays nice with our output.
+
+It also accepts a `:vital` option if you want to exit with a negative response (No).
+
+#### retrieve
+
+The retrieve function is essentially a shadow of the highline ask function, except it plays nice with our output
+
