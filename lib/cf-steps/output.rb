@@ -70,7 +70,8 @@ module CFSteps
 
     def self.confirm(message, options={})
       message = message + " (y|n) > "
-      message = "├── ".yellow + (options[:vital] ? message.red : message.blue) + " "
+      message = (options[:vital] ? message.red : message.blue) + " "
+      message = "├── ".yellow + message if @task_depth > 0
       @spinner.stop
       result = @highline.agree(message)
       if @task_depth > 0
