@@ -77,6 +77,9 @@ module CFSteps
         print "|   ".yellow * (@task_depth - 1)
         @spinner.start
       end
+      if options[:vital]
+        CFSteps::Output.error_and_exit "Aborting" unless result
+      end
       return result
     end
 
