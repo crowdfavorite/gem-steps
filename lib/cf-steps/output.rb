@@ -84,7 +84,7 @@ module CFSteps
       return result
     end
 
-    def self.retrieve(message, answer_type = String, &block)
+    def self.retrieve(message, answer_type, &block)
       message = message + " > "
       message = message.blue + " "
       message = "├── ".yellow + message if @task_depth > 0
@@ -103,8 +103,8 @@ def confirm(message, options={})
   CFSteps::Output.confirm(message, options)
 end
 
-def retrieve(message, options={})
-  CFSteps::Output.retrieve(message, options)
+def retrieve(message, answer_type = String, &block)
+  CFSteps::Output.retrieve(message, answer_type, &block)
 end
 
 def step(desc, options={})
