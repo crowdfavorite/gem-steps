@@ -3,8 +3,6 @@ require 'cf-steps'
 
 step "Update Something" do
   system "sleep 3"
-  puts "this to stdout!!"
-  puts "moar to stdout!!"
 end
 
 step "Do Something else" do
