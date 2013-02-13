@@ -12,6 +12,21 @@ module CFSteps
     @stacked_result = false
     @highline = HighLine.new
 
+    def self.step(desc, options)
+      self.start_to desc
+      begin
+        smessage = yield
+        smessage = "✔" unless smessage.is_a? String
+        self.success smessage
+      rescue Exception => e
+          message = e.message.empty? ? "X" : e.message
+
+          options[:vital] ?
+            self.error_and_exit(message):
+            self.error(message)
+      end
+    end
+
     def self.start_to message
       lead_str = ""
       if @spinner.running?
@@ -49,14 +64,14 @@ module CFSteps
     end
 
     def self.error message
-      self.result(message.red)
-    end
-
-    def self.error_and_exit message
       if @spinner.running?
         @spinner.stop
       end
       self.result(message.red)
+    end
+
+    def self.error_and_exit message
+      self.error(message)
       exit
     end
 
@@ -96,32 +111,5 @@ module CFSteps
       end
       return result
     end
-  end
-end
-
-def confirm(message, options={})
-  CFSteps::Output.confirm(message, options)
-end
-
-def retrieve(message, answer_type = String, &block)
-  CFSteps::Output.retrieve(message, answer_type, &block)
-end
-
-def report(message)
-  step message.bold.blue do " " end
-end
-
-def step(desc, options={})
-  CFSteps::Output.start_to desc
-  begin
-    smessage = yield
-    smessage = "✔" unless smessage.is_a? String
-    CFSteps::Output.success smessage
-  rescue Exception => e
-      message = e.message.empty? ? "X" : e.message
-
-      options[:vital] ?
-        CFSteps::Output.error_and_exit(message):
-        CFSteps::Output.error(message)
   end
 end
