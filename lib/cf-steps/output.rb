@@ -107,6 +107,10 @@ def retrieve(message, answer_type = String, &block)
   CFSteps::Output.retrieve(message, answer_type, &block)
 end
 
+def info(message)
+  step message.bold.blue do " " end
+end
+
 def step(desc, options={})
   CFSteps::Output.start_to desc
   begin
