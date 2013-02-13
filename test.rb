@@ -10,17 +10,17 @@ step "Do Something else" do
   step "Nested SOmething" do
     sleep 2
     step "Double! Again" do
-      info "Something you probably want to know"
+      report "Something you probably want to know"
       sleep 1
     end
     step "Double! Again" do
       sleep 1
-      info "Something you probably want to know"
+      report "Something you probably want to know"
     end
     step "Double! Nested SOmething" do
       step "Triple! Nested SOmething" do
-        info "this is something important"
-        info "Something else important"
+        report "this is something important"
+        report "Something else important"
         step "Quad! Nested SOmething" do
           sleep 1
         end
