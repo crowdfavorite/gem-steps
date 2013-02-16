@@ -16,7 +16,7 @@ To define a "step" in your scripting process simply surround the grouping of ope
 
 ```ruby
     def step "Do Something" do
-      // stuff you want to do
+      # stuff you want to do
     end
 ```
 
@@ -28,7 +28,7 @@ Nested steps are supported
 
 ```ruby
     def step "Super Important", :vital => true do
-      // vital stuff
+      # vital stuff
     end
 ```
 
@@ -36,7 +36,7 @@ Nested steps are supported
 
 ```ruby
     def step "Do Something" do
-      // do something
+      # do something
       if you_want_to_bail
         raise "This is the error Message"
       end
@@ -47,7 +47,7 @@ Nested steps are supported
 
 ```ruby
     def step "Do Something" do
-      // do something
+      # do something
       "This is the success Message"
     end
 ```
@@ -56,9 +56,9 @@ Nested steps are supported
 
 ```ruby
     def step "Do Something" do
-      // do something
+      # do something
       report "The user would like to see this info"
-      // do more stuff
+      # do more stuff
     end
 ```
 ### Getting User Feedback (highline integration)
