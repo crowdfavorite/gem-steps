@@ -15,7 +15,7 @@ Works with:
 To define a "step" in your scripting process simply surround the grouping of operations like this.
 
 ```ruby
-    def step "Do Something" do
+    step "Do Something" do
       # stuff you want to do
     end
 ```
@@ -27,7 +27,7 @@ Nested steps are supported
   **Exit if step fails**
 
 ```ruby
-    def step "Super Important", :vital => true do
+    step "Super Important", :vital => true do
       # vital stuff
     end
 ```
@@ -35,7 +35,7 @@ Nested steps are supported
   **Manually bail out of step**
 
 ```ruby
-    def step "Do Something" do
+    step "Do Something" do
       # do something
       if you_want_to_bail
         raise "This is the error Message"
@@ -46,7 +46,7 @@ Nested steps are supported
   **Custom Complete Message**
 
 ```ruby
-    def step "Do Something" do
+    step "Do Something" do
       # do something
       "This is the success Message"
     end
@@ -55,7 +55,7 @@ Nested steps are supported
   **Provide feedback**
 
 ```ruby
-    def step "Do Something" do
+    step "Do Something" do
       # do something
       report "The user would like to see this info"
       # do more stuff
