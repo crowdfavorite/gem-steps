@@ -21,9 +21,13 @@ module Steps
       rescue Exception => e
           message = e.message.empty? ? "X" : e.message
 
-          self.error(message)
           if options[:vital]
-            raise "X"
+            if @task_depth > 1
+              self.error(message)
+              raise "X"
+            else
+              self.error_and_exit(message)
+            end
           end
       end
     end
