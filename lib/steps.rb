@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'cf-steps/output'
+require 'steps/output'
 
 def step(desc, options={}, &block)
   Steps::Output.step(desc, options, &block)

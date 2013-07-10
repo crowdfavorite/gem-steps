@@ -21,9 +21,10 @@ module Steps
       rescue Exception => e
           message = e.message.empty? ? "X" : e.message
 
-          options[:vital] ?
-            self.error_and_exit(message):
-            self.error(message)
+          self.error(message)
+          if options[:vital]
+            raise "X"
+          end
       end
     end
 
@@ -94,7 +95,7 @@ module Steps
         @spinner.start
       end
       if options[:vital]
-        Steps::Output.error_and_exit "Aborting" unless result
+        raise "Aborting" unless result
       end
       return result
     end

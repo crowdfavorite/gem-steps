@@ -7,7 +7,7 @@ end
 
 step "Do Something else" do
   sleep 3
-  step "Nested SOmething" do
+  step "Nested Something" do
     sleep 2
     step "Double! Again" do
       report "Something you probably want to know"
@@ -17,15 +17,15 @@ step "Do Something else" do
       sleep 1
       report "Something you probably want to know"
     end
-    step "Double! Nested SOmething" do
-      step "Triple! Nested SOmething" do
+    step "Double! Nested Something" do
+      step "Triple (and vital)! Nested Something", :vital => true do
         report "this is something important"
         report "Something else important"
-        step "Quad! Nested SOmething" do
+        step "Quad! Nested Something" do
           sleep 1
         end
         sleep 1
-        if confirm "Is this a vital question?"
+        if confirm "Is this a vital question?", :vital => true
           step "resolution" do
             sleep 3
           end
