@@ -2,13 +2,16 @@ $:.push File.expand_path("../lib", __FILE__)
 require 'steps'
 
 step "Update Something" do
-  system "sleep 3"
+  sleep 1
 end
 
+confirm "Is this a vital question?", :vital => true
+
 step "Do Something else" do
-  sleep 3
+  confirm "Is this a vital question?", :vital => true
+  sleep 1
   step "Nested Something" do
-    sleep 2
+    sleep 1
     step "Double! Again" do
       report "Something you probably want to know"
       sleep 1
@@ -23,27 +26,27 @@ step "Do Something else" do
         report "Something else important"
         step "Quad! Nested Something" do
           sleep 1
-        end
-        sleep 1
-        if confirm "Is this a vital question?", :vital => true
-          step "resolution" do
-            sleep 3
+          if confirm "Is this a vital question?", :vital => true
+            step "resolution" do
+              sleep 1
+            end
           end
         end
+        sleep 1
         answer = retrieve "What is your favorite color?"
         step "favorite color" do
-          sleep 2
+          sleep 1
           answer
         end
       end
       step "Another Triple" do
-        sleep 3
+        sleep 1
       end
-      sleep 2
+      sleep 1
     end
-    sleep 2
+    sleep 1
   end
 
-  sleep 2
+  sleep 1
   raise
 end
