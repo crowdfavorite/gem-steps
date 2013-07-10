@@ -1,4 +1,4 @@
-# cf-steps
+# steps
 
 ## General
 
@@ -78,7 +78,7 @@ The retrieve function is essentially a shadow of the highline ask function, exce
 If you want to quiet down your Capistrano output and use this to provide the output, you can manually quiet the Capistrano logger and use this gem in the following way.
 
 ```ruby
-  require 'cf-steps'
+  require 'steps'
    
   logger.level = Logger::IMPORTANT      # or Capistrano::Logger::IMPORTANT
    

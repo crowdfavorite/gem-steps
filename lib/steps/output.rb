@@ -2,12 +2,12 @@
 STDOUT.sync
 require 'colored'
 require 'highline'
-require 'cf-steps/spinner'
+require 'steps/spinner'
 
-module CFSteps
+module Steps
   class Output
 
-    @spinner = CFSteps::Spinner.new
+    @spinner = Steps::Spinner.new
     @task_depth = 0
     @stacked_result = false
     @highline = HighLine.new
@@ -94,7 +94,7 @@ module CFSteps
         @spinner.start
       end
       if options[:vital]
-        CFSteps::Output.error_and_exit "Aborting" unless result
+        Steps::Output.error_and_exit "Aborting" unless result
       end
       return result
     end

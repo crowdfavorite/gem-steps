@@ -1,5 +1,5 @@
 $:.push File.expand_path("../lib", __FILE__)
-require 'cf-steps'
+require 'steps'
 
 step "Update Something" do
   system "sleep 3"
