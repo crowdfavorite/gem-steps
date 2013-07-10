@@ -1,14 +1,17 @@
 $:.push File.expand_path("../lib", __FILE__)
-require 'cf-steps'
+require 'steps'
 
 step "Update Something" do
-  system "sleep 3"
+  sleep 1
 end
 
+confirm "Is this a vital question?", :vital => true
+
 step "Do Something else" do
-  sleep 3
-  step "Nested SOmething" do
-    sleep 2
+  confirm "Is this a vital question?", :vital => true
+  sleep 1
+  step "Nested Something" do
+    sleep 1
     step "Double! Again" do
       report "Something you probably want to know"
       sleep 1
@@ -17,33 +20,33 @@ step "Do Something else" do
       sleep 1
       report "Something you probably want to know"
     end
-    step "Double! Nested SOmething" do
-      step "Triple! Nested SOmething" do
+    step "Double! Nested Something" do
+      step "Triple (and vital)! Nested Something", :vital => true do
         report "this is something important"
         report "Something else important"
-        step "Quad! Nested SOmething" do
+        step "Quad! Nested Something" do
           sleep 1
-        end
-        sleep 1
-        if confirm "Is this a vital question?"
-          step "resolution" do
-            sleep 3
+          if confirm "Is this a vital question?", :vital => true
+            step "resolution" do
+              sleep 1
+            end
           end
         end
+        sleep 1
         answer = retrieve "What is your favorite color?"
         step "favorite color" do
-          sleep 2
+          sleep 1
           answer
         end
       end
       step "Another Triple" do
-        sleep 3
+        sleep 1
       end
-      sleep 2
+      sleep 1
     end
-    sleep 2
+    sleep 1
   end
 
-  sleep 2
+  sleep 1
   raise
 end
