@@ -1,6 +1,8 @@
 $:.push File.expand_path("../lib", __FILE__)
 require 'steps'
 
+confirm "This is not a vital question, right?"
+
 step "Update Something" do
   sleep 1
 end

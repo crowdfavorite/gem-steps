@@ -93,7 +93,7 @@ module Steps
       message = (options[:vital] ? message.red : message.blue) + " "
       message = "├── ".yellow + message if @task_depth > 0
       @spinner.stop
-      unless @stacked_result
+      if @task_depth > 0 and not @stacked_result
         print "\n" + ("|   ".yellow * (@task_depth - 1))
       end
       result = @highline.agree(message)
