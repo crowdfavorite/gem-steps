@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.license     = "Apache 2.0"
   s.date        = Time.now.utc
   s.summary     = 'Scripting output helper'
-  s.description = 'A way to simplify the output of shell scripting written in ruby.  Should work appropriately for capistrano and rake tasks'
+  s.description = 'A way to simplify the output of shell scripting written in ruby.  Integrates with Capistrano and Rake tasks'
   s.authors     = ['Crowd Favorite']
   s.files       = Dir['lib/**/*.rb']
   s.homepage    = 'http://crowdfavorite.com'

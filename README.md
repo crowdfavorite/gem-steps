@@ -2,9 +2,9 @@
 
 ## General
 
-A gem meant to aid in simple user feedback in scripting environments.
+A gem that produces simple user feedback in scripting environments.
 
-Works with:
+Integrates with:
 
   - Capistrano Tasks
   - Rake Tasks
@@ -24,7 +24,7 @@ Nested steps are supported
 
 ### Other
 
-  **Exit if step fails**
+  **Exit if step fails.  If nested, fail parent step.**
 
 ```ruby
     step "Super Important", :vital => true do
@@ -32,7 +32,7 @@ Nested steps are supported
     end
 ```
 
-  **Manually bail out of step**
+  **Manually bail out of a step**
 
 ```ruby
     step "Do Something" do
@@ -69,9 +69,24 @@ Function similar to highline agree function, except it plays nice with our outpu
 
 It also accepts a `:vital` option if you want to exit with a negative response (No).
 
+```ruby
+    step "Confirm Blue" do
+      if confirm "Do you like blue?"
+        # bail out if they are not sure they like blue
+        confirm "Are you sure you like blue?", :vital => true
+      end
+    end
+```
+
 #### retrieve
 
 The retrieve function is essentially a shadow of the highline ask function, except it plays nice with our output
+
+```ruby
+    step "Get Favorite Color" do
+      feedback = retrieve "What is your favorite color?"
+    end
+```
 
 ### Capistrano Deployment Integration
 
@@ -79,9 +94,9 @@ If you want to quiet down your Capistrano output and use this to provide the out
 
 ```ruby
   require 'steps'
-   
+
   logger.level = Logger::IMPORTANT      # or Capistrano::Logger::IMPORTANT
-   
+
   # ... omitted ..
 
   before "deploy:update_code"       do start_to "Deploy" end
