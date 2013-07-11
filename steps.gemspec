@@ -17,8 +17,12 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     "CHANGELOG",
+    "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
     "README.md",
+    "Rakefile",
+    "VERSION",
     "lib/steps.rb",
     "lib/steps/output.rb",
     "lib/steps/spinner.rb",
