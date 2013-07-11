@@ -10,6 +10,22 @@ Integrates with:
   - Rake Tasks
   - Generic Ruby shell scripting
 
+## Installation
+
+### Github
+
+Add this to your Gemfile to install and use directly from github.
+
+```ruby
+  gem "steps", :git => 'git://github.com/crowdfavorite/gem-steps.git'
+```
+
+### RubyGems.org
+
+This gem is available as 'steps' from rubygems.org
+
+    gem install steps
+
 ## Usage
 
 To define a "step" in your scripting process simply surround the grouping of operations like this.
