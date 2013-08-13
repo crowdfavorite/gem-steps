@@ -11,28 +11,30 @@ module Steps
     @task_depth = 0
     @stacked_result = false
     @highline = HighLine.new
-    @debug = false
- 
-    def self.set_debug(debug)
-      @debug = debug
-    end
+    @debug_depth = nil
 
-    def self.step(desc, options)
+    def self.step(desc, options={}, &block)
       self.start_to desc
+
+      # Set debug depth if specified
+      if options[:debug] and @debug_depth.nil?
+        @debug_depth = @task_depth
+      end
+
       begin
-        smessage = yield
+        smessage = block.call()
         smessage = "✔" unless smessage.is_a? String
         self.success smessage
       rescue Exception => e
           message = e.message.empty? ? "X" : e.message
 
-          self.error(message)
-          if @debug
-            puts
-            puts "Backtrace:"
-            puts e.backtrace
-            puts
+          if @task_depth >= @debug_depth
+            report message, "red", false
+            e.backtrace.each { |c| report("(debug) #{c}", "red") }
+            message = "X"
           end
+
+          self.error(message)
           if options[:vital]
             if @task_depth > 1
               raise "X"
