@@ -11,6 +11,11 @@ module Steps
     @task_depth = 0
     @stacked_result = false
     @highline = HighLine.new
+    @debug = false
+ 
+    def self.set_debug(debug)
+      @debug = debug
+    end
 
     def self.step(desc, options)
       self.start_to desc
@@ -22,6 +27,12 @@ module Steps
           message = e.message.empty? ? "X" : e.message
 
           self.error(message)
+          if @debug
+            puts
+            puts "Backtrace:"
+            puts e.backtrace
+            puts
+          end
           if options[:vital]
             if @task_depth > 1
               raise "X"

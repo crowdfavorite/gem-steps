@@ -104,6 +104,14 @@ The retrieve function is essentially a shadow of the highline ask function, exce
     end
 ```
 
+### Print stacktraces for errors
+To get more information while debugging you may activate the debug mode. The gem will print the stacktraces for exceptions while in debug mode.
+
+```ruby
+    Steps::Output.set_debug true
+```
+
+
 ### Capistrano Deployment Integration
 
 If you want to quiet down your Capistrano output and use this to provide the output, you can manually quiet the Capistrano logger and use this gem in the following way.
