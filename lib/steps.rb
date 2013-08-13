@@ -29,7 +29,9 @@ def error_and_exit(message)
   Steps::Output.error_and_exit(message)
 end
 
-def report(message)
-  step message.bold.blue do " " end
+def report(message, color="blue", bold=true)
+  message = message.send("bold") if bold
+  message = message.send(color) if ['red', 'blue', 'yellow', 'green'].include? color
+  step message do " " end
 end
 
