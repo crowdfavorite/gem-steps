@@ -28,13 +28,16 @@ module Steps
       rescue Exception => e
           message = e.message.empty? ? "X" : e.message
 
-          if @task_depth >= @debug_depth
-            report message, "red", false
-            e.backtrace.each { |c| report("(debug) #{c}", "red") }
-            message = "X"
+          unless e.is_a?(SystemExit) 
+            if @task_depth >= @debug_depth
+              report message, "red", false
+              e.backtrace.each { |c| report("(debug) #{c}", "red") }
+              message = "X"
+            end
           end
 
           self.error(message)
+
           if options[:vital]
             if @task_depth > 1
               raise "X"
