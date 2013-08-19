@@ -105,7 +105,7 @@ module Steps
     end
 
     def self.report message, color, bold
-      require 'pp'
+      message = message.to_s # try and make sure we're dealing with a string
       message.each_line do |line|
         unless line.empty?
           line.strip!
