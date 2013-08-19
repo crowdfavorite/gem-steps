@@ -24,7 +24,9 @@ step "Do Something else" do
     end
     step "Double! Nested Something" do
       step "Triple (and vital)! Nested Something", :vital => true do
-        report "this is something important"
+        report "this is something important
+Another Line
+A third line"
         report "Something else important"
         step "Quad! Nested Something" do
           sleep 1

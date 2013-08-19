@@ -28,10 +28,10 @@ module Steps
       rescue Exception => e
           message = e.message.empty? ? "X" : e.message
 
-          unless e.is_a?(SystemExit) 
+          unless e.is_a?(SystemExit) or @debug_depth.nil?
             if @task_depth >= @debug_depth
-              report message, "red", false
-              e.backtrace.each { |c| report("(debug) #{c}", "red") }
+              self.report message, "red", false
+              e.backtrace.each { |c| self.report("(debug) #{c}", "red") }
               message = "X"
             end
           end
@@ -102,6 +102,18 @@ module Steps
 
     def self.info message
       self.result message.blue
+    end
+
+    def self.report message, color, bold
+      require 'pp'
+      message.each_line do |line|
+        unless line.empty?
+          line.strip!
+          line = line.send("bold") if bold
+          line = line.send(color) if ['red', 'blue', 'yellow', 'green'].include? color
+          self.step line do " " end
+        end
+      end
     end
 
     def self.confirm(message, options={})
