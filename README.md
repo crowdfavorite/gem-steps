@@ -77,6 +77,7 @@ Nested steps are supported
       # do more stuff
     end
 ```
+
 ### Getting User Feedback (highline integration)
 
 #### confirm
