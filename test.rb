@@ -24,6 +24,7 @@ step "Do Something else" do
     end
     step "Double! Nested Something" do
       step "Triple (and vital)! Nested Something", :vital => true do
+        answer = retrieve "What is your favorite color?"
         report "this is something important
 Another Line
 A third line"
@@ -37,7 +38,6 @@ A third line"
           end
         end
         sleep 1
-        answer = retrieve "What is your favorite color?"
         step "favorite color" do
           sleep 1
           answer

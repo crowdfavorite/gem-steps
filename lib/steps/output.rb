@@ -147,11 +147,16 @@ module Steps
       message = message.blue + " "
       message = "├── ".yellow + message if @task_depth > 0
       @spinner.stop
+      if @task_depth > 0 and not @stacked_result
+        print "\n" + ("|   ".yellow * (@task_depth - 1))
+      end
       result = @highline.ask(message, answer_type, &block)
       if @task_depth > 0
         print "|   ".yellow * (@task_depth - 1)
         @spinner.start
       end
+
+      @stacked_result = true
       return result
     end
   end
