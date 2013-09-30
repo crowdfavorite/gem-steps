@@ -1,4 +1,4 @@
-= develop
+= 1.1.0
   * Add debug mode to steps
   * Add multi-line report capability
   * Fix bug with retrieve as first step output
