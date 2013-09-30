@@ -11,17 +11,33 @@ module Steps
     @task_depth = 0
     @stacked_result = false
     @highline = HighLine.new
+    @debug_depth = nil
 
-    def self.step(desc, options)
+    def self.step(desc, options={}, &block)
       self.start_to desc
+
+      # Set debug depth if specified
+      if options[:debug] and @debug_depth.nil?
+        @debug_depth = @task_depth
+      end
+
       begin
-        smessage = yield
+        smessage = block.call()
         smessage = "✔" unless smessage.is_a? String
         self.success smessage
       rescue Exception => e
           message = e.message.empty? ? "X" : e.message
 
+          unless e.is_a?(SystemExit) or @debug_depth.nil?
+            if @task_depth >= @debug_depth
+              self.report message, "red", false
+              e.backtrace.each { |c| self.report("(debug) #{c}", "red") }
+              message = "X"
+            end
+          end
+
           self.error(message)
+
           if options[:vital]
             if @task_depth > 1
               raise "X"
@@ -88,6 +104,18 @@ module Steps
       self.result message.blue
     end
 
+    def self.report message, color, bold
+      message = message.to_s # try and make sure we're dealing with a string
+      message.each_line do |line|
+        unless line.empty?
+          line.strip!
+          line = line.send("bold") if bold
+          line = line.send(color) if ['red', 'blue', 'yellow', 'green'].include? color
+          self.step line do " " end
+        end
+      end
+    end
+
     def self.confirm(message, options={})
       message = message + " (y|n) > "
       message = (options[:vital] ? message.red : message.blue) + " "
@@ -119,11 +147,16 @@ module Steps
       message = message.blue + " "
       message = "├── ".yellow + message if @task_depth > 0
       @spinner.stop
+      if @task_depth > 0 and not @stacked_result
+        print "\n" + ("|   ".yellow * (@task_depth - 1))
+      end
       result = @highline.ask(message, answer_type, &block)
       if @task_depth > 0
         print "|   ".yellow * (@task_depth - 1)
         @spinner.start
       end
+
+      @stacked_result = true
       return result
     end
   end

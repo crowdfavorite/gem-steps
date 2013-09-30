@@ -77,6 +77,7 @@ Nested steps are supported
       # do more stuff
     end
 ```
+
 ### Getting User Feedback (highline integration)
 
 #### confirm
@@ -103,6 +104,19 @@ The retrieve function is essentially a shadow of the highline ask function, exce
       feedback = retrieve "What is your favorite color?"
     end
 ```
+
+### Print stacktraces for errors - Debug Mode
+
+To get more information while debugging you may activate the debug mode. The gem will print the stacktraces for exceptions while in debug mode.
+
+```ruby
+    step "Do something", :debug => true do
+      # ...
+    end
+```
+
+Debug mode is inherited by all nested steps.
+
 
 ### Capistrano Deployment Integration
 

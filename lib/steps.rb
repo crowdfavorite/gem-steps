@@ -29,7 +29,7 @@ def error_and_exit(message)
   Steps::Output.error_and_exit(message)
 end
 
-def report(message)
-  step message.bold.blue do " " end
+def report(message, color="blue", bold=true)
+  Steps::Output.report(message, color, bold)
 end
 

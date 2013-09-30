@@ -24,7 +24,10 @@ step "Do Something else" do
     end
     step "Double! Nested Something" do
       step "Triple (and vital)! Nested Something", :vital => true do
-        report "this is something important"
+        answer = retrieve "What is your favorite color?"
+        report "this is something important
+Another Line
+A third line"
         report "Something else important"
         step "Quad! Nested Something" do
           sleep 1
@@ -35,7 +38,6 @@ step "Do Something else" do
           end
         end
         sleep 1
-        answer = retrieve "What is your favorite color?"
         step "favorite color" do
           sleep 1
           answer
