@@ -76,6 +76,7 @@ module Steps
 
       if @task_depth > 0
         @task_depth -= 1
+        @debug_depth = nil if @debug_depth and @debug_depth == @task_depth
         if @task_depth > 0
           print "|   ".yellow * (@task_depth - 1)
           @spinner.start
