@@ -18,8 +18,9 @@ step "Do Something else" do
       report "Something you probably want to know"
       sleep 1
     end
-    step "Double! Again" do
+    step "Double! Again", :debug => true do
       sleep 1
+      raise "Problem"
       report "Something you probably want to know"
     end
     step "Double! Nested Something" do
