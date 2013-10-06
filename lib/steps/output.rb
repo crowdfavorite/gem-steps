@@ -104,7 +104,7 @@ module Steps
       self.result message.blue
     end
 
-    def self.report message, color, bold
+    def self.report message, color, bold = true
       message = message.to_s # try and make sure we're dealing with a string
       message.each_line do |line|
         unless line.empty?

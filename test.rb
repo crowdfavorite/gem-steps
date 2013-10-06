@@ -14,8 +14,9 @@ step "Do Something else" do
   sleep 1
   step "Nested Something" do
     sleep 1
-    step "Double! Again" do
+    step "Double! Again", :debug => true do
       report "Something you probably want to know"
+      raise "Problem"
       sleep 1
     end
     step "Double! Again" do
@@ -50,7 +51,6 @@ A third line"
     end
     sleep 1
   end
-
   sleep 1
   raise
 end
