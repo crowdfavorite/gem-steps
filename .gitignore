@@ -3,6 +3,7 @@
 .bundle
 .config
 .ruby-version
+bin/
 coverage
 InstalledFiles
 lib/bundler/man
