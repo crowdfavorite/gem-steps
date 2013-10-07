@@ -28,3 +28,4 @@ Jeweler::Tasks.new do |gem|
 end
 Jeweler::RubygemsDotOrgTasks.new
 
+task :default => [:clobber, :build]
