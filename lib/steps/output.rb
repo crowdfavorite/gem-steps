@@ -7,13 +7,21 @@ require 'steps/spinner'
 module Steps
   class Output
 
-    @spinner = Steps::Spinner.new
-    @task_depth = 0
-    @stacked_result = false
-    @highline = HighLine.new
-    @debug_depth = nil
+    def self.singleton
+      @singleton ||= Output.new
+      @singleton
+    end
 
-    def self.step(desc, options={}, &block)
+    def initialize
+      @singleton = nil
+      @spinner = Steps::Spinner.new
+      @task_depth = 0
+      @stacked_result = false
+      @highline = HighLine.new
+      @debug_depth = nil
+    end
+
+    def step(desc, options={}, &block)
       self.start_to desc
 
       # Set debug depth if specified
@@ -48,7 +56,7 @@ module Steps
       end
     end
 
-    def self.start_to message
+    def start_to message
       lead_str = ""
       if @spinner.running?
         @spinner.stop
@@ -69,7 +77,7 @@ module Steps
       @stacked_result = false
     end
 
-    def self.result message
+    def result message
       @spinner.stop
 
       puts message
@@ -85,27 +93,27 @@ module Steps
       @stacked_result = true
     end
 
-    def self.error message
+    def error message
       if @spinner.running?
         @spinner.stop
       end
       self.result message.red
     end
 
-    def self.error_and_exit message
+    def error_and_exit message
       self.error message
       exit
     end
 
-    def self.success message
+    def success message
       self.result message.green
     end
 
-    def self.info message
+    def info message
       self.result message.blue
     end
 
-    def self.report message, color, bold = true
+    def report message, color, bold = true
       message = message.to_s # try and make sure we're dealing with a string
       message.each_line do |line|
         unless line.empty?
@@ -117,7 +125,7 @@ module Steps
       end
     end
 
-    def self.confirm(message, options={})
+    def confirm(message, options={})
       message = message + " (y|n) > "
       message = (options[:vital] ? message.red : message.blue) + " "
       message = "├── ".yellow + message if @task_depth > 0
@@ -143,7 +151,7 @@ module Steps
       return result
     end
 
-    def self.retrieve(message, answer_type, &block)
+    def retrieve(message, answer_type, &block)
       message = message + " > "
       message = message.blue + " "
       message = "├── ".yellow + message if @task_depth > 0
