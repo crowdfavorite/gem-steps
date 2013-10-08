@@ -9,7 +9,6 @@ module Steps
 
     def self.singleton
       @singleton ||= Output.new
-      @singleton
     end
 
     def initialize
