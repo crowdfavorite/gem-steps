@@ -13,20 +13,20 @@ module Steps
       @running
     end
 
-    def start()
+    def start
       return if @running
 
       @running = true
       @spinner_thread = Thread.new do
         while @running do
           print @chars.push(@chars.shift).first
-          sleep(0.1)
+          sleep 0.1
           print "\b \b"
         end
       end
     end
 
-    def stop()
+    def stop
       return unless @running
 
       @running = false
