@@ -7,12 +7,12 @@ require 'steps/spinner'
 module Steps
   class Output
 
+    @@singleton = nil
     def self.singleton
-      @singleton ||= Output.new
+      @@singleton ||= Output.new
     end
 
     def initialize
-      @singleton = nil
       @spinner = Steps::Spinner.new
       @task_depth = 0
       @stacked_result = false
