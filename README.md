@@ -144,7 +144,6 @@ If you want to quiet down your Capistrano output and use this to provide the out
 
 ### Development
 
-    rake test
     rake
     rake install
 
