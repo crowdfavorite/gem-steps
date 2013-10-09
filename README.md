@@ -1,5 +1,7 @@
 # steps
 
+[![Build Status](https://travis-ci.org/crowdfavorite/gem-steps.png?branch=develop)](https://travis-ci.org/crowdfavorite/gem-steps)
+
 ## General
 
 A gem that produces simple user feedback in scripting environments.
