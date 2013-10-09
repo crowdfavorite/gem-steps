@@ -2,12 +2,13 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'steps/version'
+require 'date'
 
 Gem::Specification.new do |s|
   s.name        = "steps"
   s.version     = Steps::VERSION
   s.authors     = ["Crowd Favorite"]
-  s.date        = "2013-10-06"
+  s.date        = Date.today.to_s
   s.summary     = %q{Ruby scripting output helper}
   s.description = %q{A way to simplify the output of shell scripting written in ruby.  Integrates with Capistrano and Rake tasks.}
   s.files       = Dir['[A-Z]*', 'steps.gemspec', 'lib/**/'] - ['Gemfile.lock']

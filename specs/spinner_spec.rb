@@ -12,6 +12,10 @@ describe Steps::Spinner do
     @spinner = nil
   end
 
+  it "should be initialized in a stopped state" do
+    @spinner.running?.must_equal false
+  end
+
   it "reports running? status correctly" do
     @spinner.start
     @spinner.running?.must_equal true
