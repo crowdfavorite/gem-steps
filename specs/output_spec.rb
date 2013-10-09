@@ -4,6 +4,10 @@ require 'steps/output'
 
 describe Steps::Output do
 
+  after do
+    $stdin = STDIN
+  end
+
   it "produces a valid singleton" do
     output = Steps::Output.singleton
     output.must_be_same_as Steps::Output.singleton
@@ -15,7 +19,7 @@ describe Steps::Output do
     value = false
     output = Steps::Output.new
     output.step "Non-vital Confirm" do
-      output.confirm "This is a vital question?"
+      output.confirm "This is a regular confirm?"
       value = true
     end
     value.must_equal true
