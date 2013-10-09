@@ -1,3 +1,8 @@
+= 1.1.2-dev
+  * Add Unit Testing
+  * Move away from Jeweler
+  * Move to instance providing singleton method for Output class
+
 = 1.1.1
   * Fix breaking issues with debug mode
 
