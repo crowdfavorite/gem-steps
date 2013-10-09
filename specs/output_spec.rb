@@ -41,7 +41,7 @@ describe Steps::Output do
   end
 
   it "should stop execution of step if negative response to vital confirm" do
-    $stdin = StringIO.new("n\n")
+    $stdin = StringIO.new("n\r\n")
     value = false
     output = Steps::Output.new
     output.step "Non-vital Confirm" do
@@ -52,7 +52,7 @@ describe Steps::Output do
   end
 
   it "should stop execution of step if negative response to vital confirm" do
-    $stdin = StringIO.new("n\n")
+    $stdin = StringIO.new("n\r\n")
     value = false
     output = Steps::Output.new
     output.step "Vital Confirm" do
