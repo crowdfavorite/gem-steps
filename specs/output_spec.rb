@@ -8,10 +8,36 @@ describe Steps::Output do
     $stdin = STDIN
   end
 
-  it "produces a valid singleton" do
+  it "should produce a valid singleton" do
     output = Steps::Output.singleton
     output.must_be_same_as Steps::Output.singleton
     output.wont_be_same_as Steps::Output.new
+  end
+
+  it "should continue parent step if nested step is not vital and fails" do
+    output = Steps::Output.new
+    value = false
+    output.step "outer" do
+      output.instance_variable_get(:@task_depth).must_equal 1
+      output.step "non-vital inner" do
+        raise "Ooooops"
+      end
+      value = true
+    end
+    value.must_equal true
+  end
+
+  it "should fail parent step if nested step is vital and fails" do
+    output = Steps::Output.new
+    value = false
+    output.step "outer" do
+      output.instance_variable_get(:@task_depth).must_equal 1
+      output.step "vital inner", :vital => true do
+        raise "Ooooops"
+      end
+      value = true
+    end
+    value.must_equal false
   end
 
   it "should stop execution of step if negative response to vital confirm" do

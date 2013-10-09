@@ -63,3 +63,15 @@ step "Nested Steps" do
     end
   end
 end
+
+step "Nested Steps" do
+  sleep 0.5
+  step "Nested Step Level 1" do
+    sleep 0.5
+    step "Vital Step Level 2", :vital => true do
+      sleep 0.5
+      raise "Oooops"
+    end
+    report "This shouldn't be shown"
+  end
+end
