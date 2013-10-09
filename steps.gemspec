@@ -17,8 +17,6 @@ Gem::Specification.new do |s|
   s.add_dependency "colored", ">= 1.2"
   s.add_dependency "highline", ">= 1.6"
   s.add_development_dependency "bundler", "~> 1.3"
-  s.add_development_dependency "rspec", "~> 2.11"
-  s.add_development_dependency "bundler", "~> 1.0"
   s.add_development_dependency "rake", "~> 10.1.0"
 end
 
