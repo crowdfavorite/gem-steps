@@ -40,12 +40,36 @@ describe Steps::Output do
     value.must_equal false
   end
 
-  it "should stop execution of step if negative response to vital confirm" do
+  it "should continue parent step if nested step is vital and passes" do
+    output = Steps::Output.new
+    value = false
+    output.step "outer" do
+      output.instance_variable_get(:@task_depth).must_equal 1
+      output.step "vital inner", :vital => true do
+        "Vital Success"
+      end
+      value = true
+    end
+    value.must_equal true
+  end
+
+  it "should continue execution of step if negative response to non-vital confirm" do
     $stdin = StringIO.new("n\r\n")
     value = false
     output = Steps::Output.new
     output.step "Non-vital Confirm" do
       output.confirm "This is a regular confirm?"
+      value = true
+    end
+    value.must_equal true
+  end
+
+  it "should continue execution of step if positive response to vital confirm" do
+    $stdin = StringIO.new("y\r\n")
+    value = false
+    output = Steps::Output.new
+    output.step "Vital Confirm" do
+      output.confirm "This is a vital question?", :vital => true
       value = true
     end
     value.must_equal true
