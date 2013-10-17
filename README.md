@@ -1,6 +1,6 @@
 # steps
 
-[![Build Status](https://travis-ci.org/crowdfavorite/gem-steps.png?branch=develop)](https://travis-ci.org/crowdfavorite/gem-steps)
+[![Build Status](https://travis-ci.org/crowdfavorite/gem-steps.png?branch=master,develop)](https://travis-ci.org/crowdfavorite/gem-steps)
 
 ## General
 
