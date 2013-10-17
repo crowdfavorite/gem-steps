@@ -1,4 +1,4 @@
 module Steps
-  VERSION = '1.1.1.pre'
+  VERSION = '1.1.2'
 end
 
