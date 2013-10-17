@@ -1,5 +1,7 @@
 # steps
 
+[![Build Status](https://travis-ci.org/crowdfavorite/gem-steps.png?branch=develop)](https://travis-ci.org/crowdfavorite/gem-steps)
+
 ## General
 
 A gem that produces simple user feedback in scripting environments.
@@ -12,21 +14,13 @@ Integrates with:
 
 ## Installation
 
-### Github
-
-Add this to your Gemfile to install and use directly from github.
-
-```ruby
-  gem "steps", :git => 'git://github.com/crowdfavorite/gem-steps.git'
-```
-
-### RubyGems.org
-
-This gem is available as 'steps' from rubygems.org
-
     gem install steps
 
 ## Usage
+
+```ruby
+require 'steps'
+```
 
 To define a "step" in your scripting process simply surround the grouping of operations like this.
 
@@ -147,3 +141,9 @@ If you want to quiet down your Capistrano output and use this to provide the out
   before "deploy:restart"           do start_to "Restart" end
   after "deploy:restart"            do success end
 ```
+
+### Development
+
+    rake
+    rake install
+
