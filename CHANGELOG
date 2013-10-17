@@ -1,4 +1,4 @@
-= 1.1.2-dev
+= 1.1.2
   * Add Unit Testing
   * Move away from Jeweler
   * Move to instance providing singleton method for Output class
