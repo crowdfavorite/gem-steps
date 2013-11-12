@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.date        = Date.today.to_s
   s.summary     = %q{Ruby scripting output helper}
   s.description = %q{A way to simplify the output of shell scripting written in ruby.  Integrates with Capistrano and Rake tasks.}
-  s.files       = Dir['[A-Z]*', 'steps.gemspec', 'lib/**/'] - ['Gemfile.lock']
+  s.files       = Dir['[A-Z]*', 'steps.gemspec', 'lib/**/*', 'example.rb', 'specs/**/*']
   s.homepage    = "http://github.com/crowdfavorite/gem-steps"
   s.licenses    = ["Apache 2.0"]
   s.required_ruby_version = '>= 1.9.3'
