@@ -47,9 +47,9 @@ module Steps
 
           if options[:vital]
             if @task_depth > 1
-              raise "X"
+              raise StandardError.new("X"), e
             else
-              exit
+              raise SystemExit.new, e
             end
           end
       end
