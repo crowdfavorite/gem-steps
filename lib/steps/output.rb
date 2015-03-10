@@ -1,6 +1,6 @@
 # encoding: utf-8
 STDOUT.sync
-require 'colored'
+require 'colorize'
 require 'highline'
 require 'steps/spinner'
 
@@ -37,8 +37,8 @@ module Steps
 
           unless e.is_a?(SystemExit) or @debug_depth.nil?
             if @task_depth >= @debug_depth
-              self.report message, "red", false
-              e.backtrace.each { |c| self.report("(debug) #{c}", "red") }
+              self.report message, :red, false
+              e.backtrace.each { |c| self.report("(debug) #{c}", :red) }
               message = "X"
             end
           end
@@ -70,7 +70,7 @@ module Steps
         message = lead_str + ("|   " * (@task_depth - 1)) + "├── " + message
       end
 
-      print "#{message}".yellow + "   "
+      print "#{message}".colorize(:yellow) + "   "
       @spinner.start
       @task_depth += 1
       @stacked_result = false
@@ -85,7 +85,7 @@ module Steps
         @task_depth -= 1
         @debug_depth = nil if @debug_depth and @debug_depth == @task_depth
         if @task_depth > 0
-          print "|   ".yellow * (@task_depth - 1)
+          print "|   ".colorize(:yellow) * (@task_depth - 1)
           @spinner.start
         end
       end
@@ -96,7 +96,7 @@ module Steps
       if @spinner.running?
         @spinner.stop
       end
-      self.result message.red
+      self.result message.colorize(:red)
     end
 
     def error_and_exit message
@@ -105,11 +105,11 @@ module Steps
     end
 
     def success message
-      self.result message.green
+      self.result message.colorize(:green)
     end
 
     def info message
-      self.result message.blue
+      self.result message.colorize(:blue)
     end
 
     def report message, color, bold = true
@@ -117,8 +117,8 @@ module Steps
       message.each_line do |line|
         unless line.empty?
           line.strip!
-          line = line.send("bold") if bold
-          line = line.send(color) if ['red', 'blue', 'yellow', 'green'].include? color
+          line = line.colorize(:bold) if bold
+          line = line.colorize(color)
           self.step line do " " end
         end
       end
@@ -126,15 +126,15 @@ module Steps
 
     def confirm(message, options={})
       message = message + " (y|n) > "
-      message = (options[:vital] ? message.red : message.blue) + " "
-      message = "├── ".yellow + message if @task_depth > 0
+      message = (options[:vital] ? message.colorize(:red) : message.colorize(:blue)) + " "
+      message = "├── ".colorize(:yellow) + message if @task_depth > 0
       @spinner.stop
       if @task_depth > 0 and not @stacked_result
-        print "\n" + ("|   ".yellow * (@task_depth - 1))
+        print "\n" + ("|   ".colorize(:yellow) * (@task_depth - 1))
       end
       result = @highline.agree(message)
       if @task_depth > 0
-        print "|   ".yellow * (@task_depth - 1)
+        print "|   ".colorize(:yellow) * (@task_depth - 1)
         @spinner.start
       end
 
@@ -152,15 +152,15 @@ module Steps
 
     def retrieve(message, answer_type, &block)
       message = message + " > "
-      message = message.blue + " "
-      message = "├── ".yellow + message if @task_depth > 0
+      message = message.colorize(:blue) + " "
+      message = "├── ".colorize(:yellow) + message if @task_depth > 0
       @spinner.stop
       if @task_depth > 0 and not @stacked_result
-        print "\n" + ("|   ".yellow * (@task_depth - 1))
+        print "\n" + ("|   ".colorize(:yellow) * (@task_depth - 1))
       end
       result = @highline.ask(message, answer_type, &block)
       if @task_depth > 0
-        print "|   ".yellow * (@task_depth - 1)
+        print "|   ".colorize(:yellow) * (@task_depth - 1)
         @spinner.start
       end
 
